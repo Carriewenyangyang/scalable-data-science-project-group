@@ -1,5 +1,11 @@
 """
 
+First step of the data processing pipeline. This script reads the Spotify MPD dataset and 
+repackages it into smaller packets of data. Each packet contains 100 playlists. The 
+packets are saved as JSON files in the 'fedn-packets' directory.
+
+Work by: Christian
+
 """
 
 import os
