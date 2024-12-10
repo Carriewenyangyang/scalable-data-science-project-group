@@ -1,0 +1,12 @@
+name: fedn-lightgcn
+build_dependencies:
+  - pip
+  - setuptools
+  - wheel
+dependencies:
+  - fedn==0.19.0
+  - torch==2.4.1
+  - torch_geometric
+  - numpy
+  - pandas
+  - pyarrow
