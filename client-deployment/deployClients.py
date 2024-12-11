@@ -3,7 +3,9 @@ import os
 
 
 def generate_unique_bash_script(host, nr):
-    # Same as your existing function
+    """
+    Generates a unique bash script for a host based on the row number in the CSV file.
+    """
     csv_file = "file_mapping.csv"
     with open(csv_file, mode="r") as file:
         reader = list(csv.DictReader(file))
@@ -70,7 +72,7 @@ def create_local_tmux_session(host, username, password, bash_script_content, dry
 
 def main():
     dry_run = False
-    # Define your list of hosts and credentials
+    # Define your list of hosts and credentials, and the number of the row in the CSV file (1-indexed)
     hosts = [
         {"host": "asgard1-401", "username": "lukev81", "password": "xxxxx", "nr": 1},
         {"host": "asgard1-402", "username": "lukev81", "password": "xxxxx", "nr": 2},

@@ -6,7 +6,6 @@ This directory contains the necessary files and instructions for deploying the c
 
 - `deployClients.py`: Script to automate the deployment process.
 - `getData.py`: Script to fetch Google Drive data tokens which is used in the deployment
-- `README.md`: This file, providing an overview and instructions.
 
 ## Prerequisites
 
@@ -45,16 +44,24 @@ pip install -r requirements.txt
 ```
 
 ## Deployment Instructions
+1. **Upload Data to Google Drive**
 
-1. **Get the Service Account File**
+    We used Google Drive for storage. There should be one `client.yaml` file for each client and one data package for each client in the drive. The files should be named as follows:
+    
+    - `client-1.yaml`, `client-2.yaml`, etc.
+    - `packet-1.zip`, `packet-2.zip`, etc.
+
+    The `client.yaml` files can be generated at FEDn/Scaleout website and are used to connect to the project.
+
+2. **Get the Service Account File**
    
-   Obtain the service account file from Google Cloud and place it in the same directory as the deployment scripts.
+   In order to be able to fetch the data from the drive a service account at Google Cloud is needed. The service account then needs to be shared access to the drive. When that is done a service account file for the service account should be downloadedand put in the same directory as `getData.py`.
 
-2. **Update `getData.py`**
+3. **Update `getData.py`**
    
    Update the `getData.py` with correct name on the service account file.
 
-3. **Run `getData.py`**
+4. **Run `getData.py`**
    
    Execute the `getData.py` script to fetch all necessary tokens and store them in a CSV file. Each computer will require one token for the `client.yaml` file and one for the data being used.
 
@@ -62,19 +69,21 @@ pip install -r requirements.txt
    python getData.py
    ```
 
-4. **Update the Host List**
+5. **Update the Host List**
    
    Before running the deployment script, ensure that the host list in `deployClients.py` is updated with the correct information for each client machine.
 
-5. **Run `deployClients.py`**
+6. **Run `deployClients.py`**
    
    Execute the `deployClients.py` script to start the deployment process. 
 
    ```sh
    python deployClients.py
    ```
+   The script will create a folder with copies of all the bash scripts executed during the actual deployment.
+   You can perform a dry-run of the deployment process which then only generates the scripts. This is done by changing the dry_run variable in the script.
 
-6. **Monitor the clients with tmux**
+7. **Monitor the clients with tmux**
 
     1. **List Clients in tmux**
 
