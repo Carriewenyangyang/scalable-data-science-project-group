@@ -81,7 +81,11 @@ pip install -r requirements.txt
    python deployClients.py
    ```
    The script will create a folder with copies of all the bash scripts executed during the actual deployment.
-   You can perform a dry-run of the deployment process which then only generates the scripts. This is done by changing the dry_run variable in the script.
+   You can perform a dry-run of the deployment process which then only generates the scripts this is done by 
+
+   ```sh
+   python deployClients.py --dry_run
+   ```
 
 7. **Monitor the clients with tmux**
 

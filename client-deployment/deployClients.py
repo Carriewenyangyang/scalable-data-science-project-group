@@ -1,3 +1,4 @@
+import argparse
 import csv
 import os
 
@@ -71,7 +72,11 @@ def create_local_tmux_session(host, username, password, bash_script_content, dry
 
 
 def main():
-    dry_run = False
+    parser = argparse.ArgumentParser(description="Create tmux sessions for hosts.")
+    parser.add_argument("--dry_run", action="store_true", help="Run in dry-run mode without making changes.")
+    args = parser.parse_args()
+
+    dry_run = args.dry_run
     # Define your list of hosts and credentials, and the number of the row in the CSV file (1-indexed)
     hosts = [
         {"host": "asgard1-401", "username": "lukev81", "password": "xxxxx", "nr": 1},
