@@ -13,6 +13,9 @@ To design and demonstrate a distributed recommendation system using federated le
 + Automatic token installation API for client integration.
 + Demonstration of real-time model updates and weights aggregation.
 
+### Contributions
+Lukas: Responsible for client deployment, i.e. handling connections to clients, distribution of data via google-drive/google-cloud and creating the necessary environment for clients to do the training. Code-wise, this would be the content of the client-deployment folder. 
+
 | Role                | Resposibility                                              |
 | ------------------- | ---------------------------------------------------------- |
 | Model Adaptation    | Modifying the Amazon Book NN to fit Spotify's music data.  |
