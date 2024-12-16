@@ -25,7 +25,7 @@ https://docs.google.com/presentation/d/1vwBrOeIUwzV4vr9qLPf-0gjrwkwZA6DJtOSQCfVI
 ## Author Contributions  
 - **Lukas Eveborn**: Responsible for client deployment, i.e. handling connections to clients, distribution of data via google-drive/google-cloud and creating the necessary environment for clients to do the training. Code-wise, this would be the content of the client-deployment folder. 
 - **Christian Gustavsson**:  Data pre-processing, i.e., repurposing the original dataset and working with Olle to prepare the relevant data for client distribution. The code for this work is uploaded into the data-processing folder.
-- **Yangyang Wen**: Configured the virtual machine in Umeå, ensuring sufficient computational resources and environment (such as Ubuntu OS) to support client deployment and federated learning tasks. Set 4-core CPU and 8GB RAM as the minimum configuration requirements to ensure system stability. Collaborated with nodes in Linköping to train the seed model and perform federated learning tasks. Additionally, initiated the creation of the project PPT and worked with team members to refine its content. Initialized the GitHub repository and compiled the content to complete the README file.
+- **Yangyang Wen**: Configured the virtual machine in Umeå with Ubuntu OS, ensuring sufficient resources (at least 4-core CPU, 8GB RAM) for client deployment and federated learning. Collaborated with Linköping nodes to train the seed model and perform federated learning. Initiated the project PPT and collaborated on refining its content. Set up the GitHub repository and compiled the README file.
 - **Olle Hansson**: 
 
 | Role                | Resposibility                                              |
