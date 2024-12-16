@@ -16,6 +16,8 @@ To design and demonstrate a distributed recommendation system using federated le
 ### Contributions
 Lukas: Responsible for client deployment, i.e. handling connections to clients, distribution of data via google-drive/google-cloud and creating the necessary environment for clients to do the training. Code-wise, this would be the content of the client-deployment folder. 
 
+Christian: Data pre-processing, i.e. repurposing the original dataset and working with Olle on getting the relevant data ready for client-distribtution. The code for this work is uploaded into the data-processing folder.
+
 | Role                | Resposibility                                              |
 | ------------------- | ---------------------------------------------------------- |
 | Model Adaptation    | Modifying the Amazon Book NN to fit Spotify's music data.  |
