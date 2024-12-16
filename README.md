@@ -27,7 +27,7 @@ Christian: Data pre-processing, i.e., repurposing the original dataset and worki
 
 # Installation and Setup
 ## Requirements
-+ Python: Version >= 3.7
++ Python: Version >= 3.7, recommended: Python >=3.9, <=3.12.
 + Fedn: Ensure that Fedn is installed and configured.
 + Required libraries:
 
