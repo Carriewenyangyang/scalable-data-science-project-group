@@ -4,8 +4,11 @@ This project leverages Fedn to implement a distributed federated learning framew
 
 ## Project Group
 Lukas Eveborn, Linköping University
+
 Christian Gustavsson, Linköping University
+
 Olle Hansson, Linköping University
+
 Yangyang Wen, Umeå University
 
 ## Project Overview
