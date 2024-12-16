@@ -2,13 +2,13 @@
 
 This project leverages Fedn to implement a distributed federated learning framework for a music recommendation system. Collaboratively developed by Umeå University and Linköping University, it utilizes Spotify datasets to train and evaluate the model. The following provides an overview of the project, setup instructions, usage guide, and results.
 
-## Project Group
-+ Lukas Eveborn, Linköping University
+## Authors
++ [Lukas Eveborn], [Linköping University]
 + Christian Gustavsson, Linköping University
 + Olle Hansson, Linköping University
 + Yangyang Wen, Umeå University
 
-## Project Overview
+## Project Description
 ### Objective
 To design and demonstrate a distributed recommendation system using federated learning that suggests personalized music playlists based on user preferences.
 
@@ -19,10 +19,15 @@ To design and demonstrate a distributed recommendation system using federated le
 + Automatic token installation API for client integration.
 + Demonstration of real-time model updates and weights aggregation.
 
-### Contributions
-Lukas: Responsible for client deployment, i.e. handling connections to clients, distribution of data via google-drive/google-cloud and creating the necessary environment for clients to do the training. Code-wise, this would be the content of the client-deployment folder. 
+[Write a concise and informative description of your project here (100-400 words). Focus on the purpose, key features, and goals of the project. For example, what problem does it solve, how does it work, and what makes it unique?]  
 
-Christian: Data pre-processing, i.e., repurposing the original dataset and working with Olle to prepare the relevant data for client distribution. The code for this work is uploaded into the data-processing folder.
+## Oral Presentation Document  
+https://docs.google.com/presentation/d/1vwBrOeIUwzV4vr9qLPf-0gjrwkwZA6DJtOSQCfVIUS4/edit#slide=id.p
+
+## Author Contributions  
+- **[Lukas]**: Responsible for client deployment, i.e. handling connections to clients, distribution of data via google-drive/google-cloud and creating the necessary environment for clients to do the training. Code-wise, this would be the content of the client-deployment folder. 
+- **[Christian]**:  Data pre-processing, i.e., repurposing the original dataset and working with Olle to prepare the relevant data for client distribution. The code for this work is uploaded into the data-processing folder.
+- **[Yangyang Wen]**: [Brief description of their contributions.]
 
 | Role                | Resposibility                                              |
 | ------------------- | ---------------------------------------------------------- |
@@ -30,6 +35,17 @@ Christian: Data pre-processing, i.e., repurposing the original dataset and worki
 | Data Preprocessing  | Preparing Spotify data into training-ready datasets.       |
 | API Development     | Automating token installation and client model integration.|
 | Client Deployment   | Running distributed clients at Umeå University.            |
+
+
+## License  
+MIT License 
+
+## Code and Repository Structure  
+This repository contains the code used in our group project. The structure is as follows:  
+- `src/`: Source code for the project.  
+- `data/`: Example or synthetic datasets used during experiments.  
+- `docs/`: Documentation and presentation materials.  
+- `README.md`: This file. 
 
 # Installation and Setup
 ## Requirements
