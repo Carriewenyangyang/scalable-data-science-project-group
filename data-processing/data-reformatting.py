@@ -8,6 +8,9 @@ saves the test dataset as a numpy file.
 
 Work by: Olle Hansson, with contributions from Christian Gustavsson.
 
+NOTE:
+- Download data from this source and place in the folder data/dirty
+
 """
 
 import json
@@ -21,14 +24,14 @@ from tqdm import tqdm
 
 np.random.seed(0)
 
-def create_clean_data(path, nr_of_packets=None):
+def create_clean_data(path, nr_of_original_packets=None):
 
     # create dataframe from json files
     df = pd.DataFrame()
 
-    if nr_of_packets is not None:
-        #for i in range(nr_of_packets):
-        for i in tqdm(range(nr_of_packets)):
+    if nr_of_original_packets is not None:
+        #for i in range(nr_of_original_packets):
+        for i in tqdm(range(nr_of_original_packets)):
             with open(path + str(i) + ".json", 'r') as file:
                 loaded = json.load(file)
                 playlists = {playlist['pid']: playlist for playlist in list(loaded.values())}
@@ -39,30 +42,31 @@ def create_clean_data(path, nr_of_packets=None):
             loaded = json.load(file)
             playlists = {playlist['pid']: playlist for playlist in list(loaded.values())}
             df = pd.concat([df, pd.DataFrame(playlists).T], axis=0)
-     
-#        "name": "relax",
-#        "collaborative": "false",
-#        "pid": 94,
-#        "modified_at": 1495324800,
-#        "num_tracks": 124,
-#        "num_albums": 112,
-#        "num_followers": 1,
-#        "tracks": [
-#            {
-#                "pos": 0,
-#                "artist_name": "James Bay",
-#                "track_uri": "spotify:track:13HVjjWUZFaWilh2QUJKsP",
-#                "artist_uri": "spotify:artist:4EzkuveR9pLvDVFNx6foYD",
-#                "track_name": "Let It Go",
-#                "album_uri": "spotify:album:5BxvswQSGWrBbVCdx6mFGO",
-#                "duration_ms": 260533,
-#                "album_name": "Chaos And The Calm"
-#            },
-#        ],
-#        "num_edits": 35,
-#        "duration_ms": 27578241,
-#        "num_artists": 97,
-#        "description": "chilllll out"
+
+    ## The original data is in the following format:
+    #        "name": "relax",
+    #        "collaborative": "false",
+    #        "pid": 94,
+    #        "modified_at": 1495324800,
+    #        "num_tracks": 124,
+    #        "num_albums": 112,
+    #        "num_followers": 1,
+    #        "tracks": [
+    #            {
+    #                "pos": 0,
+    #                "artist_name": "James Bay",
+    #                "track_uri": "spotify:track:13HVjjWUZFaWilh2QUJKsP",
+    #                "artist_uri": "spotify:artist:4EzkuveR9pLvDVFNx6foYD",
+    #                "track_name": "Let It Go",
+    #                "album_uri": "spotify:album:5BxvswQSGWrBbVCdx6mFGO",
+    #                "duration_ms": 260533,
+    #                "album_name": "Chaos And The Calm"
+    #            },
+    #        ],
+    #        "num_edits": 35,
+    #        "duration_ms": 27578241,
+    #        "num_artists": 97,
+    #        "description": "chilllll out"
 
     # remove all columns except for pid and tracks
     df = df[["pid", "tracks"]]
@@ -74,17 +78,16 @@ def create_clean_data(path, nr_of_packets=None):
     df["tracks"] = df["tracks"].apply(lambda x: list(set(x)))
 
     # save to pickle
-    if nr_of_packets is not None:
-        save_path = "data/Spotify/packet-0-" + str(nr_of_packets-1) + "-clean"
+    if nr_of_original_packets is not None:
+        save_path = "data/packet-0-" + str(nr_of_original_packets-1) + "-clean"
     else:
-        save_path = "data/Spotify/packet-0-clean"
+        save_path = "data/packet-0-clean"
     #df.to_pickle(save_path + ".pkl")
     #df.to_csv(save_path + ".csv")
     #df.to_json(save_path + ".json")
     df.to_parquet(save_path + ".parquet")
     
     return df
-
 
 def create_lookuptable(data):
 
@@ -110,7 +113,6 @@ def create_lookuptable(data):
     df = df[df["num_pids"] > 5]
 
     return df
-    
 
 def create_adjacency_matrix(df, train_splits=1):
 
@@ -136,21 +138,18 @@ def create_adjacency_matrix(df, train_splits=1):
     split_indices1, split_indices2 = indices[:split_point], indices[split_point:]
 
     # Use the indices to split the original array
-    #train_adj = adj_arr[split_indices1]
     test_adj = adj_arr[split_indices2]
 
     # lexsort
-    #train_adj = train_adj[np.lexsort((train_adj[:,1], train_adj[:,0]))]
     test_adj = test_adj[np.lexsort((test_adj[:,1], test_adj[:,0]))]
 
     # transpose
-    #train_adj = train_adj.T
     test_adj = test_adj.T
 
     # Split into 51 training datasets, resulting in 34 x 112080 and 17 x 112079
     training_datasets = np.array_split(split_indices1, train_splits)
 
-    main_folder_name = "lightgcn/data/Spotify/fedn-packets"
+    main_folder_name = "data-processing/data/fedn-packets"
     if not os.path.exists(main_folder_name):
         os.makedirs(main_folder_name)
         print(f"Folder '{main_folder_name}' created.")
@@ -204,7 +203,6 @@ def create_adjacency_matrix(df, train_splits=1):
            except Exception as e:
                print(f"Error zipping/removing subfolder '{subfolder}': {e}")
 
-
     return train_adj, test_adj
 
 def get_track_info(df, track_df_index):
@@ -217,33 +215,34 @@ def get_track_info(df, track_df_index):
     
     return link
 
+## MAIN PROGRAM:
 
-nr_of_packets = 100 # The original amout of packets is 100
+nr_of_original_packets = 100 # The original amount of packets is 100
+nr_of_client_datapackets = 51 # The amount of client data packets is 51 for our work
 
-## create clean data
-dirty_path = "data/Spotify/dirty/packet-"
-clean_data = create_clean_data(dirty_path, nr_of_packets=nr_of_packets)
+## create clean data. 
+dirty_path = "data/dirty/packet-" 
+clean_data = create_clean_data(dirty_path, nr_of_original_packets=nr_of_original_packets)
 
 ## load clean data
-clean_path = "lightgcn/data/Spotify/packet-0-" + str(nr_of_packets-1) + "-clean"
+clean_path = "data-processing/data/packet-0-" + str(nr_of_original_packets-1) + "-clean"
 clean_data = pd.read_parquet(clean_path + ".parquet")
 
 ## create dataframe
 df = create_lookuptable(clean_data)
 # print(df)
 ## save df to parquet
-df.to_parquet("lightgcn/data/Spotify/lookuptable-0-" + str(nr_of_packets-1) + ".parquet")
+df.to_parquet("data-processing/data/lookuptable-0-" + str(nr_of_original_packets-1) + ".parquet")
 
 # load df
-df = pd.read_parquet("lightgcn/data/Spotify/lookuptable-0-" + str(nr_of_packets-1) + ".parquet")
+df = pd.read_parquet("data-processing/data/lookuptable-0-" + str(nr_of_original_packets-1) + ".parquet")
 # create adjacency matrix
-train_adj, test_adj = create_adjacency_matrix(df, 51)
+train_adj, test_adj = create_adjacency_matrix(df, nr_of_client_datapackets)
 # save adj_arr to npy
-np.save("lightgcn/data/Spotify/train_adj-0-" + str(nr_of_packets-1) + ".npy", train_adj)
-np.save("lightgcn/data/Spotify/test_adj-0-" + str(nr_of_packets-1) + ".npy", test_adj)
+np.save("data-processing/data/train_adj-0-" + str(nr_of_original_packets-1) + ".npy", train_adj)
+np.save("data-processing/data/test_adj-0-" + str(nr_of_original_packets-1) + ".npy", test_adj)
 
 print("Done!")
-
 
 ## get track_info given index
 #index = 0
