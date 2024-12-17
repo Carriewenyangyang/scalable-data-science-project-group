@@ -23,10 +23,10 @@ To design and demonstrate a distributed recommendation system using federated le
 https://docs.google.com/presentation/d/1vwBrOeIUwzV4vr9qLPf-0gjrwkwZA6DJtOSQCfVIUS4/edit#slide=id.p
 
 ## Author Contributions  
-- **Lukas Eveborn**: Responsible for client deployment, i.e. handling connections to clients, distribution of data via google-drive/google-cloud and creating the necessary environment for clients to do the training. Code-wise, this would be the content of the client-deployment folder. 
+- **Lukas Eveborn**: Responsible for client deployment, i.e. handling connections to clients, distribution of data via Google Drive/Google Cloud and creating the necessary environment for clients to do the training. Code-wise, this would be the content of the client-deployment folder. 
 - **Christian Gustavsson**:  Data pre-processing, i.e., repurposing the original dataset and working with Olle to prepare the relevant data for client distribution. The code for this work is uploaded into the data-processing folder.
-- **Yangyang Wen**: Configured the virtual machine in Umeå with Ubuntu OS, ensuring sufficient resources (at least 4-core CPU, 8GB RAM) for client deployment and federated learning. Collaborated with Linköping nodes to train the seed model and perform federated learning. Initiated the project PPT and collaborated on refining its content. Set up the GitHub repository and compiled the README file.
-- **Olle Hansson**: 
+- **Yangyang Wen**: Configured the virtual machines in Umeå with Ubuntu OS, ensuring sufficient resources (at least 4-core CPU, 8GB RAM) for client deployment and federated learning. Collaborated with Linköping nodes to train the seed model and perform federated learning. Initiated the project PPT and collaborated on refining its content. Set up the GitHub repository and compiled the README file.
+- **Olle Hansson**: Responsible for the adaptation of the Amazon Book neural network for the Spotify music dataset, modifying the architecture to optimize it for the music recommendation task. Conducted research to refine the model and ensure its effectiveness. Assisted in preparing and preprocessing the dataset, ensuring data quality and compatibility for training.
 
 | Role                | Resposibility                                              |
 | ------------------- | ---------------------------------------------------------- |
@@ -35,47 +35,54 @@ https://docs.google.com/presentation/d/1vwBrOeIUwzV4vr9qLPf-0gjrwkwZA6DJtOSQCfVI
 | API Development     | Automating token installation and client model integration.|
 | Client Setup & Management | Setting up and configuring distributed clients at Umeå University for federated learning.            |
 
-
-## License  
-MIT License 
-
 ## Code and Repository Structure  
 This repository contains the code used in our group project. The structure is as follows:  
-- `client-deployment/`: Scripts to deploy the clients to the cloud and step-by-step instructions.
-- `data-processing/`: Scripts for downloading and preprocessing the synthetic datasets used during the experiments.
-- `fedn-lightgcn/client/`: Documentation and presentation materials.
+- `client-deployment/`: Scripts for automating client setup, connecting to the federated server, and data downloading.
+- `data-processing/`: Preprocessing Spotify datasets for training and evaluation.
+- `fedn-lightgcn/client/`: Contains the core recommendation model (LightGCN) and training/validation scripts. 
 - `research/`: Contain a paper related to Fedn in scalable federated machine learning.
 - `README.md`: This file.
 - `lightgcn.py`: The core code of the recommendation system based on the LightGCN model.
 
-# Installation and Setup
-## Requirements
+## Installation and Setup
+### Prerequisites
 + Python: Version >= 3.7, recommended: Python >=3.9, <=3.12.
 + Fedn: Ensure that Fedn is installed and configured.
-+ Required libraries: See files fedn-lightgcn/client/python_env.yaml and client-deployment/requirements.txt.
++ Required libraries: See `fedn-lightgcn/client/python_env.yaml` and `client-deployment/requirements.txt`.
 
-## Steps
+### Steps
 1. Clone the Repository:
+   ```
+   git clone https://github.com/Carriewenyangyang/scalable-data-science-project-group.git
+   ```
 2. Setup Virtual Environment:
-3. Install Dependencies:
-4. Prepare the Dataset:
-   + Download the Spotify dataset from [Spotify Dataset Link].
-   + Prepare the data using:
-     
-5. Run the API (set up the client tokens)
-6. Deploy the Clients:
-   + Ensure all clients are configured for training.
-   + Run clients on distributed machines:
+   ```
+   pip install -r requirements.txt
+   ```
+3. Prepare the Dataset:
+   - Download the Spotify dataset.
+   - Preprocess the data:
+     ```
+     cd data-processing
+     python preprocess_data.py
+     ```
+4. Deploy clients:
+   ```
+   cd client-deployment
+   python deployClients.py
+   ```
   
 ## Usage 
-1. Start the federated server
-2. Train the model across clients
-3. Monitor weight updates and performance using the Fedn dashboard.
-4. Evaluate the model
+1. Start the federated learning server via Fedn.
+2. Deploy clients to connect with the server.
+3. Monitor training and weight updates via the Fedn dashboard.
 
 ## Results
-- Federated Learning:
-  + Demonstrated weight aggregation across clients.
-- Model Performance:
-  + Personalized playlist recommendations.
- 
+- **Federated Learning**: Successfully demonstrated weight aggregation across distributed clients.
+- **Model Performance**: Personalized playlist recommendations based on LightGCN.
+
+## License  
+MIT License 
+
+## References
+- [Research Papers on Fedn](https://github.com/Carriewenyangyang/scalable-data-science-project-group/tree/main/research)
