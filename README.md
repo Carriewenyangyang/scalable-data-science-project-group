@@ -1,6 +1,6 @@
 # Federated Learning for Music Recommendation System
 
-This project leverages Fedn to implement a distributed federated learning framework for a music recommendation system. Collaboratively developed by Umeå University and Linköping University, it utilizes Spotify Million playlist dataset to train and evaluate the model. The following provides an overview of the project, setup instructions, usage guide, and results.
+This project leverages Fedn to implement a distributed federated learning framework for a music recommendation system. Collaboratively developed by Umeå University and Linköping University, it utilizes Spotify Million Playlist Dataset to train and evaluate the model. The following provides an overview of the project, setup instructions, usage guide, and results.
 
 ## Authors
 + Lukas Eveborn, Linköping University
