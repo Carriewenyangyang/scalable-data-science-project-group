@@ -5,7 +5,7 @@ However, the data is available for download here: https://drive.google.com/drive
 
 The stats.info file available in the gitrepo contains information about the playlists, distribution of songs, etc.
 
-The dataset is the result of work by Ching-Wei Chen, Paul Lamere, Markus Schedl, and Hamed Zamani. Recsys Challenge 2018: Automatic Music Playlist Continuation. In Proceedings of the 12th ACM Conference on Recommender Systems (RecSys ’18), 2018. < href="https://doi.org/10.1145/3240323.3240342">https://doi.org/10.1145/3240323.3240342</a>
+The dataset is the result of work by Ching-Wei Chen, Paul Lamere, Markus Schedl, and Hamed Zamani. Recsys Challenge 2018: Automatic Music Playlist Continuation. In Proceedings of the 12th ACM Conference on Recommender Systems (RecSys ’18), 2018. https://doi.org/10.1145/3240323.3240342
 
 The use of the dataset is subject to these terms: https://www.aicrowd.com/challenges/spotify-million-playlist-dataset-challenge/challenge_rules
 
