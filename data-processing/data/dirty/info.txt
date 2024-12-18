@@ -1,0 +1,6 @@
+This folder contains the dirty data downloaded from this drive:
+
+https://drive.google.com/drive/folders/19cT8svEXxUmpq5Q6n54RyrzS2kuS1j7H
+
+Place the data packets (packet-0.json, ... , packet-99.json) in this folder. 
+These packets vill be be cleaned and reformatted for the project work.
