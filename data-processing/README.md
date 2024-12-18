@@ -25,7 +25,6 @@ The training datasets are saved in subfolders and then zipped for easier downloa
 
 Running this program will create a fedn-packets folder in the data folder. There, the packets for each client are placed. Each packet contain its unique training data and the same packet of test data. 
 
-## Data packets used for this work
+The result of this program is also available for direct download here: https://drive.google.com/drive/folders/1LU9DgwBK7AqY6rvWJ3Enm4pWl5YdWl5H
 
-The repackaged and reformated data used for this work is available at:
-https://drive.google.com/drive/folders/1kY71gk1gPtTIvmz1WuDq2KgWEUyGpdtO?usp=sharing
+We are now ready to run the clients. 
