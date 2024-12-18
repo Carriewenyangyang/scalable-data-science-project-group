@@ -18,7 +18,6 @@ def compile_model():
     :rtype: torch.nn.Module
     """
     return LightGCN(
-    #num_nodes=100000+206122, # Spotify 0-9
     num_nodes=1000000+857768, # Spotify 0-99
     embedding_dim=16,
     num_layers=2,

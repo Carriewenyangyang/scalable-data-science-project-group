@@ -1,12 +1,8 @@
 import os.path as osp
-
 import torch
 from tqdm import tqdm
-
-from torch_geometric.datasets import AmazonBook
 from torch_geometric.nn import LightGCN
 from torch_geometric.utils import degree
-
 import pandas as pd
 import numpy as np
 
@@ -19,23 +15,28 @@ class Data:
         self.edge_index = torch.from_numpy(np.concatenate([train_adj, train_adj[[1, 0], :]], axis=1)).to(device)
         self.edge_label_index = torch.from_numpy(edge_label_index).to(device)
 
-path = osp.join(osp.dirname(osp.realpath(__file__)), "data", "Spotify")
+path = osp.join(osp.dirname(osp.realpath(__file__)), "data-processing", "data", "fedn-packets")
 
+# load full dataset
 df_clean = pd.read_parquet(path + "/packet-0-99-clean.parquet")
 num_playlists = df_clean.shape[0]
 
+# load lookup table
 df_lookup = pd.read_parquet(path + "/lookuptable-0-99.parquet")
 num_tracks = df_lookup.shape[0]
 
+# load adjacency matrices, train and test
 train_adj = np.load(path + "/train_adj-0-99.npy")
 train_adj[1, :] += num_playlists
 test_adj = np.load(path + "/test_adj-0-99.npy")
 test_adj[1, :] += num_playlists
 
+# create data object
 data = Data(train_adj, test_adj)
 
 train_edge_label_index = torch.from_numpy(train_adj).to(device)
 
+# create the data loader
 batch_size = 16384
 test_batch_size = 1024
 train_loader = torch.utils.data.DataLoader(
@@ -46,6 +47,7 @@ train_loader = torch.utils.data.DataLoader(
 
 ##########################################
 
+# create the model and optimizer
 model = LightGCN(
     num_nodes=num_playlists + num_tracks,
     embedding_dim=32,
@@ -53,7 +55,7 @@ model = LightGCN(
 ).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
-
+# training function
 def train():
     total_loss = total_examples = 0
 
@@ -65,7 +67,7 @@ def train():
                 pos_edge_label_index[0], # user
                 torch.randint(
                     num_playlists, num_playlists + num_tracks, (index.numel(),), device=device
-                ), # random book edge
+                ), # random item edge
             ],
             dim=0,
         )
@@ -94,6 +96,7 @@ def train():
     return total_loss / total_examples
 
 
+# testing function
 @torch.no_grad()
 def test(k: int):
     emb = model.get_embedding(data.edge_index)
@@ -144,11 +147,11 @@ for epoch in range(1, 10):
 
 
 #   # Recommendation
-#   src_index = 0
-#   dst_index = torch.arange(num_playlists, num_playlists + num_tracks, device=device)
+#   src_index = 0 # user index
+#   dst_index = torch.arange(num_playlists, num_playlists + num_tracks, device=device) # item indices
 #   recommendation = model.recommend(data.edge_index, src_index=src_index, dst_index=dst_index, k=1)
 #   
-#   df_lookup = pd.read_parquet(path + "/lookuptable-0-9.parquet")
+#   df_lookup = pd.read_parquet(path + "/lookuptable-0-99.parquet")
 #   
 #   track_uri = df_lookup["track"][recommendation[0].item() - num_playlists]
 #   print("https://open.spotify.com/track/" + track_uri.split(":")[-1])

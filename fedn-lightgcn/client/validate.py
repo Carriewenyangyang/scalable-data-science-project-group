@@ -25,20 +25,12 @@ def validate(in_model_path, out_json_path, data_path=None):
 
     ## Load data
     data = load_data(data_path)
-    #num_playlists = 100000
     num_playlists = 1000000
-    #num_tracks = 206122
     num_tracks = 857768
     
     train_adj = data.train_adj
     train_edge_label_index = torch.from_numpy(train_adj).to(device)
-    batch_size = 4096
     test_batch_size = 256
-    train_loader = torch.utils.data.DataLoader(
-        range(train_edge_label_index.size(1)),
-        shuffle=True,
-        batch_size=batch_size,
-    )
 
     # Load model
     model = load_parameters(in_model_path).to(device)

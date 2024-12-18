@@ -49,28 +49,19 @@ This repository contains the code used in our group project. The structure is as
    git clone https://github.com/Carriewenyangyang/scalable-data-science-project-group.git
    ```
 2. Prepare the Dataset:
-   - Download the Spotify dataset.
-   - Preprocess the data:
      ```
-     cd data-processing
-     python preprocess_data.py
+     Follow the instructions in the "data-processing" directory.
      ```
-3. Test the model locally by running "lightgcn.py".
+3. Test the model locally by running:
+    ```
+    lightgcn.py"
+    ```
 4. Prepare the Fedn server by uploading the package (the files in "fedn-lightgcn/client") and a seed model, following the instructions here https://docs.scaleoutsystems.com/en/stable/quickstart.html.
 5. Deploy clients:
    ```
    Follow the instructions in the "client-deployment" directory.
    ```
-6. Start training of the Federated Recommender system.
-  
-## Usage 
-1. Start the federated learning server via Fedn.
-2. Deploy clients to connect with the server.
-3. Monitor training and weight updates via the Fedn dashboard.
-
-## Results
-- **Federated Learning**: Successfully demonstrated weight aggregation across distributed clients.
-- **Model Performance**: Personalized playlist recommendations based on LightGCN.
+6. Start training of the Federated Recommender system via Fedn dashboard.
 
 ## License  
 MIT License 

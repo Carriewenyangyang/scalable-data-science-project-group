@@ -35,7 +35,6 @@ def load_data(data_path, is_train=True):
             self.edge_index = torch.from_numpy(np.concatenate([train_adj, train_adj[[1, 0], :]], axis=1)).to(device)
             self.edge_label_index = torch.from_numpy(edge_label_index).to(device)
 
-    #num_users = 100000
     num_users = 1000000
 
     train_adj = np.load(data_path + "/train_adj-0-99.npy")
