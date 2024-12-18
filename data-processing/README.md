@@ -27,8 +27,6 @@ The script creates a lookup table and an adjacency matrix for the data. For the 
 
 The training datasets are saved in subfolders and then zipped for easier download to the clients. 
 
-Running this program will create a fedn-packets folder in the data folder. There, the packets for each client are placed. Each packet contain its unique training data and the same packet of test data. 
-
-The result of this program is also available for direct download here: https://drive.google.com/drive/folders/1LU9DgwBK7AqY6rvWJ3Enm4pWl5YdWl5H
+Running this program will create a fedn-packets folder in the data folder. There, the packets for each client are placed. Each packet contain its unique training data and the same packet of test data. The result of this program is also available for direct download here: https://drive.google.com/drive/folders/1LU9DgwBK7AqY6rvWJ3Enm4pWl5YdWl5H. Download and place them in a folder called data/fedn-packets.
 
 We are now ready to run the clients. 
