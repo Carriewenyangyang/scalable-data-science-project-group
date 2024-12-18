@@ -1,13 +1,13 @@
 # Data processing
 
-For the project, the Spotify Million Playlist Dataset (MPD) was used. It can be downloaded from different sources, such as Kaggle: https://www.kaggle.com/datasets/himanshuwagh/spotify-million
+The Spotify Million Playlist Dataset (MPD) was used for the project. It can be downloaded from different sources, such as Kaggle. 
+However, the data is available for download here: https://drive.google.com/drive/folders/19cT8svEXxUmpq5Q6n54RyrzS2kuS1j7H
 
-The stats.info file available in the gitrepo contains information about the playlists, distribution of songs etc.
+The stats.info file available in the gitrepo contains information about the playlists, distribution of songs, etc.
 
-The dataset is the result of work by Ching-Wei Chen, Paul Lamere, Markus Schedl, and Hamed Zamani. Recsys Challenge 2018: Automatic Music Playlist Continuation. In Proceedings of the 12th ACM Conference on Recommender Systems (RecSys ’18), 2018.
+The dataset is the result of work by Ching-Wei Chen, Paul Lamere, Markus Schedl, and Hamed Zamani. Recsys Challenge 2018: Automatic Music Playlist Continuation. In Proceedings of the 12th ACM Conference on Recommender Systems (RecSys ’18), 2018. < href="https://doi.org/10.1145/3240323.3240342">https://doi.org/10.1145/3240323.3240342</a>
 
-The use of the dataset are subject to these terms: https://www.aicrowd.com/challenges/spotify-million-playlist-dataset-challenge/challenge_rules
-
+The use of the dataset is subject to these terms: https://www.aicrowd.com/challenges/spotify-million-playlist-dataset-challenge/challenge_rules
 
 ## Step 1: Repackaging the original dataset
 
