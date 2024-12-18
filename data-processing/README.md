@@ -11,15 +11,19 @@ The use of the dataset is subject to these terms: https://www.aicrowd.com/challe
 
 ## Step 1: Repackaging the original dataset
 
-First step of the data processing pipeline. This script reads the Spotify MPD dataset and repackages it into fewer packets of data. Each packet contains 10,000 playlists. Since the project will treat all playlists alike, it also reformats the data so that the key for each entry is the playlist id, pid. 
+repackaging-spotify-mpd.py: This is the first step of the data processing pipeline. This script reads the Spotify MPD dataset and repackages it into fewer packets of data. Each packet contains 10,000 playlists. Since the project will treat all playlists alike, it also reformats the data so that the key for each entry is the playlist ID, pid. 
+
+However, the result of this work is already available for download here: https://drive.google.com/drive/folders/19cT8svEXxUmpq5Q6n54RyrzS2kuS1j7H
 
 ## Step 2: Reformatting data for the project
 
-Second step in the data processing pipeline. This script reads the raw data from the 100 files created in step one, cleans it, and saves it in a more efficient format. 
+data-reformatting.py: This is the second step in the data processing pipeline. This script reads the raw (dirty) data from the 100 files created in step one, cleans it, and saves it in a more efficient format. 
 
-The script creates a lookup table for the data, and creates an adjacency matrix for the data. For the adjeceny matrix, only ids for playlist and songs are useful which saves space. The adjacency matrix is split into 51 training datasets and one test dataset, since the goal is to run 51 federated clients. 
+The script creates a lookup table and an adjacency matrix for the data. For the adjacency matrix, only the IDs for playlists and songs are useful, which saves space. The adjacency matrix is split into 51 training datasets and one test dataset since the goal is to run 51 federated clients. 
 
-The training datasets are saved in subfolders, and then zipped for easier download on the clients. 
+The training datasets are saved in subfolders and then zipped for easier download to the clients. 
+
+Running this program will create a fedn-packets folder in the data folder. There, the packets for each client are placed. Each packet contain its unique training data and the same packet of test data. 
 
 ## Data packets used for this work
 
