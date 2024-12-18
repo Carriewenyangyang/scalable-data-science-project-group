@@ -9,7 +9,7 @@ saves the test dataset as a numpy file.
 Work by: Olle Hansson, with contributions from Christian Gustavsson.
 
 NOTE:
-- Download data from this source and place in the folder data/dirty
+- There has to be data in the 'data/dirty' folder for this script to work.
 
 """
 
@@ -158,7 +158,6 @@ def create_adjacency_matrix(df, train_splits=1):
 
     # Now we save the data packets in subfolders
     for i in range(len(training_datasets)):
-        # print(f"Training dataset {i}: {training_datasets[i].size}")
         temp_dataset = training_datasets[i]
         train_adj = adj_arr[temp_dataset]
         train_adj = train_adj[np.lexsort((train_adj[:,1], train_adj[:,0]))]
@@ -217,34 +216,33 @@ def get_track_info(df, track_df_index):
 
 ## MAIN PROGRAM:
 
-nr_of_original_packets = 100 # The original amount of packets is 100
-nr_of_client_datapackets = 51 # The amount of client data packets is 51 for our work
+nr_of_original_packets = 100 # The original amount of packets is 100 (the # of dirty files)
+nr_of_client_datapackets = 51 # The amount of client data packets is 51 for our work (the # clients to use later on)
 
-## create clean data. 
+# create clean data. 
 dirty_path = "data/dirty/packet-" 
 clean_data = create_clean_data(dirty_path, nr_of_original_packets=nr_of_original_packets)
 
-## load clean data
+# load clean data
 clean_path = "data-processing/data/packet-0-" + str(nr_of_original_packets-1) + "-clean"
 clean_data = pd.read_parquet(clean_path + ".parquet")
 
-## create dataframe
+# create dataframe
 df = create_lookuptable(clean_data)
 # print(df)
-## save df to parquet
+
+# save df to parquet
 df.to_parquet("data-processing/data/lookuptable-0-" + str(nr_of_original_packets-1) + ".parquet")
 
 # load df
 df = pd.read_parquet("data-processing/data/lookuptable-0-" + str(nr_of_original_packets-1) + ".parquet")
 # create adjacency matrix
 train_adj, test_adj = create_adjacency_matrix(df, nr_of_client_datapackets)
+
 # save adj_arr to npy
 np.save("data-processing/data/train_adj-0-" + str(nr_of_original_packets-1) + ".npy", train_adj)
 np.save("data-processing/data/test_adj-0-" + str(nr_of_original_packets-1) + ".npy", test_adj)
 
-print("Done!")
+print("The preprocessing work is done!")
 
-## get track_info given index
-#index = 0
-#track_info = get_track_info(df, index)
-#print(track_info)
+# The get_track_info() function can be used to get the track info from a track index in the dataframe.
